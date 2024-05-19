@@ -1,0 +1,104 @@
+
+Session24_PWM.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000000d6  00000000  00000000  00000054  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+   8:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+   c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  10:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  14:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  18:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  1c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  20:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  24:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  28:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  2c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  30:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  34:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  38:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  3c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  40:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  44:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  48:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  4c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  50:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d8 e0       	ldi	r29, 0x08	; 8
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+  60:	0e 94 41 00 	call	0x82	; 0x82 <main>
+  64:	0c 94 69 00 	jmp	0xd2	; 0xd2 <_exit>
+
+00000068 <__bad_interrupt>:
+  68:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+0000006c <init_PWM>:
+  6c:	88 e6       	ldi	r24, 0x68	; 104
+  6e:	83 bf       	out	0x33, r24	; 51
+  70:	12 be       	out	0x32, r1	; 50
+  72:	88 e0       	ldi	r24, 0x08	; 8
+  74:	87 bb       	out	0x17, r24	; 23
+  76:	08 95       	ret
+
+00000078 <start_PWM>:
+  78:	93 b7       	in	r25, 0x33	; 51
+  7a:	91 60       	ori	r25, 0x01	; 1
+  7c:	93 bf       	out	0x33, r25	; 51
+  7e:	8c bf       	out	0x3c, r24	; 60
+  80:	08 95       	ret
+
+00000082 <main>:
+  82:	cf 93       	push	r28
+  84:	df 93       	push	r29
+  86:	0e 94 36 00 	call	0x6c	; 0x6c <init_PWM>
+  8a:	c8 ec       	ldi	r28, 0xC8	; 200
+  8c:	d0 e0       	ldi	r29, 0x00	; 0
+  8e:	8e ef       	ldi	r24, 0xFE	; 254
+  90:	90 e0       	ldi	r25, 0x00	; 0
+  92:	0e 94 3c 00 	call	0x78	; 0x78 <start_PWM>
+  96:	80 e1       	ldi	r24, 0x10	; 16
+  98:	97 e2       	ldi	r25, 0x27	; 39
+  9a:	fe 01       	movw	r30, r28
+  9c:	31 97       	sbiw	r30, 0x01	; 1
+  9e:	f1 f7       	brne	.-4      	; 0x9c <main+0x1a>
+  a0:	01 97       	sbiw	r24, 0x01	; 1
+  a2:	d9 f7       	brne	.-10     	; 0x9a <main+0x18>
+  a4:	80 e8       	ldi	r24, 0x80	; 128
+  a6:	90 e0       	ldi	r25, 0x00	; 0
+  a8:	0e 94 3c 00 	call	0x78	; 0x78 <start_PWM>
+  ac:	80 e1       	ldi	r24, 0x10	; 16
+  ae:	97 e2       	ldi	r25, 0x27	; 39
+  b0:	fe 01       	movw	r30, r28
+  b2:	31 97       	sbiw	r30, 0x01	; 1
+  b4:	f1 f7       	brne	.-4      	; 0xb2 <main+0x30>
+  b6:	01 97       	sbiw	r24, 0x01	; 1
+  b8:	d9 f7       	brne	.-10     	; 0xb0 <main+0x2e>
+  ba:	84 e1       	ldi	r24, 0x14	; 20
+  bc:	90 e0       	ldi	r25, 0x00	; 0
+  be:	0e 94 3c 00 	call	0x78	; 0x78 <start_PWM>
+  c2:	80 e1       	ldi	r24, 0x10	; 16
+  c4:	97 e2       	ldi	r25, 0x27	; 39
+  c6:	fe 01       	movw	r30, r28
+  c8:	31 97       	sbiw	r30, 0x01	; 1
+  ca:	f1 f7       	brne	.-4      	; 0xc8 <main+0x46>
+  cc:	01 97       	sbiw	r24, 0x01	; 1
+  ce:	d9 f7       	brne	.-10     	; 0xc6 <main+0x44>
+  d0:	de cf       	rjmp	.-68     	; 0x8e <main+0xc>
+
+000000d2 <_exit>:
+  d2:	f8 94       	cli
+
+000000d4 <__stop_program>:
+  d4:	ff cf       	rjmp	.-2      	; 0xd4 <__stop_program>
