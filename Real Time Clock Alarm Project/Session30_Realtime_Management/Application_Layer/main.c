@@ -66,7 +66,10 @@ char arr[10];
 
 		_delay_ms(50);
 
+		if((S1.min > 18) && (S1.min <25)){
+			PORTD|=(1<<PD5);
 
+		}
 
 	}
 
