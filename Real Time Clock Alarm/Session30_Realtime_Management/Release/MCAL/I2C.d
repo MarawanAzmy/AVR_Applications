@@ -1,0 +1,1 @@
+MCAL/I2C.o MCAL/I2C.o: ../MCAL/I2C.c
