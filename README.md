@@ -3,7 +3,7 @@ A set of applications and drivers utilising the AVR Atmega32 peripherals, and ot
 Each folder contains the C project, and the coresponding proteus simulation file.  <br /><br />
 
 * **Real-time Clock Alarm Project:**                                                                     <br /><br />
-<img src="https://github.com/MarawanAzmy/AVR_Applications/blob/main/Real%Time%Clock%Alarm/RTC.png" width=80% height=80%>
+<img src="https://github.com/MarawanAzmy/AVR_Applications/blob/main/Real%20Time%20Clock%20Alarm/RTC.png" width=80% height=80%>
 
 * **I2C Communication:**                                                                     <br /><br />
 <img src="https://github.com/MarawanAzmy/AVR_Applications/blob/main/I2C%20Communication/I2C_Github.png" width=80% height=80%>
