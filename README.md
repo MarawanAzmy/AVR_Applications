@@ -3,6 +3,8 @@ A set of projects and drivers utilizing the AVR Atmega32 peripherals, and others
 Each folder contains the C project, and the corresponding proteus simulation file.  <br />
 Each project is implemented using the static architecture (App. layer, Service layer, HAL, MCAL). <br /><br />
 * **Multi-tasking Scheduler Project:**                                                                     <br /><br />
+<img src="https://github.com/MarawanAzmy/AVR_Applications/blob/main/Projects/Real%20Time%20Clock%20Alarm%20Project/RTC.png" width=80% height=80%>
+
 https://github.com/MarawanAzmy/AVR_Applications/assets/77661443/98bfe60e-0515-44ee-b26b-e18f8a5cb3a6
 
 * **Real-time Clock Alarm Project:**                                                                     <br /><br />
