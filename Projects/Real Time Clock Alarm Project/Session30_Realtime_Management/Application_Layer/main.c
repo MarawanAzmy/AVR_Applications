@@ -1,79 +1,64 @@
-/*
- * main.c
+/**
+ * @file    main.c
+ * @brief   RTC alarm: shows the DS1307 time on the LCD and turns on PD5 when the minute is between 19 and 24.
+ * @author  Marawan Azmy
  *
- *  Created on: 24 May 2024
- *      Author: marmar
+ * The hour format is selected with hr_12_24 in RTC.h (the Proteus model uses 24-hour).
+ * The RTC keeps running on its backup battery, so it only needs to be programmed once.
  */
+
 #include "../HAL/RTC.h"
 #include "../HAL/LCD.h"
 #include <avr/io.h>
+
 int main(){
-char arr[10];
+	char arr[10];
 
-
-//in the RTC h file, select 24 or 12 in hr_12_24 macro
-//note that proteus in 24 h, set hr_12_24  to 24 to read it correctly
-	DDRD |=(1<<PD5);
-	PORTD&= ~(1<<PD5);
-	RTC S1;//fill it, set data, then use it to read data
+	DDRD |= (1<<PD5);
+	PORTD &= ~(1<<PD5);
+	RTC S1;
 
 	S1.sec = 15;
 	S1.min = 35;
-	S1.hour= 7;
-	S1.day = 2;//tuesday
+	S1.hour = 7;
+	S1.day = 2;	/* Tuesday */
 	S1.date = 24;
 	S1.month = 5;
 	S1.year = 24;
 	S1.control = 0;
 
-	RTC_init();//init I2C
-	//RTC_set_parameters(&S1);//set once and then comment this line
-
-
+	RTC_init();
+	/* Uncomment once to program the RTC with the values above, then comment it out again. */
+	//RTC_set_parameters(&S1);
 
 	LCD_Init();
 	LCD_Clear_Display();
 	LCD_Send_String_Row_Column(0,0,"Time: ");
 
-
-//you just set once and then comment set line
-//this module automatically increment clock, and never go out of power bec connected to external battery
-//just get from module and display in loop
-
-
 	while(1){
-
-
 		S1 = RTC_get_parameters();
-
 
 		LCD_Go_To_Row_Column(1,0);
 
-		LCD_Int_To_String(S1.hour, arr); //convert to chars to write on LCD, takes chars
+		LCD_Int_To_String(S1.hour, arr);
 		LCD_Send_String(arr);
-
 
 		LCD_Send_String(" : ");
 
-		LCD_Int_To_String(S1.min, arr); //convert to chars to write on LCD, takes chars
+		LCD_Int_To_String(S1.min, arr);
 		LCD_Send_String(arr);
-
 
 		LCD_Send_String(" : ");
 
-		LCD_Int_To_String(S1.sec , arr); //convert to chars to write on LCD, takes chars
+		LCD_Int_To_String(S1.sec, arr);
 		LCD_Send_String(arr);
 
 		_delay_ms(50);
 
-		if((S1.min > 18) && (S1.min <25)){
-			PORTD|=(1<<PD5);
-
+		if((S1.min > 18) && (S1.min < 25)){
+			PORTD |= (1<<PD5);
 		}
-
 	}
-
 
 	return 0;
 }
-
